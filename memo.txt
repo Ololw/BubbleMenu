@@ -1,0 +1,27 @@
+Surcharger la classe JMenu et JMenuItems pour pouvoir en faire des "prioritaires"
+Dessiner des cercles en fonction du curseur et de la distance entre le curseur et menu intéréssant
+Simuler un clic sur menu avec doClick
+
+Les menus parents héritent de la priorité des menus enfants
+
+
+
+Menus avec plein de couleurs
+quelques submenus
+
+choix d'une couleur -> changement de la couleur des menus prioritaires
+
+
+Circle : 
+Collé au menu le plus proche
+
+Check si un menu est sélectionné : si oui, check si un submenu dans ce menu est sélectionné
+												sinon cercle entre prio et pointeur
+								sinon cercle avec les menus de la barre
+
+
+Bubbling menu sur mouse dragged : 
+Voir quel menu est actif si aucun : menu bar
+	récupère coordonnées -> on trouve le menu prio le plus proche pour faire le cercle. Si release : -> doClick() sur le menu
+								
+								
