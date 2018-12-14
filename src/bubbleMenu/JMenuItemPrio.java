@@ -93,8 +93,8 @@ public class JMenuItemPrio extends JMenuItem {
 		}
 		else
 		{
-			this.setBackground(Color.PINK);
-			this.setForeground(Color.BLACK);
+			this.setBackground(new Color(238,238,238));
+			this.setForeground(new Color(51,51,51));
 		}
 	}
 	
