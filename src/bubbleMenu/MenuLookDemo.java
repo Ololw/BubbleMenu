@@ -382,6 +382,9 @@ public class MenuLookDemo {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					jMenuActuel = null;
+				}
 			}
 
 			@Override
