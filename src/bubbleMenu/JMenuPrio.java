@@ -1,8 +1,13 @@
 package bubbleMenu;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JMenu;
+import javax.swing.SwingUtilities;
+
+import sun.swing.SwingUtilities2;
 
 public class JMenuPrio extends JMenu {
 
@@ -28,8 +33,8 @@ public class JMenuPrio extends JMenu {
 		this.setOpaque(true);
 		prioritaire = false;
 		changeBg();
-		
 	}
+	
 	
 	public void changeBg()
 	{
@@ -50,6 +55,15 @@ public class JMenuPrio extends JMenu {
 		this.couleur = couleur;
 		changeBg();
 	}
+	
+	public void changePrio()
+	{
+		if (prioritaire)
+			prioritaire = false;
+		else
+			prioritaire = true;
+	}
+	
 
 	
 	

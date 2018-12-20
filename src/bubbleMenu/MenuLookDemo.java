@@ -36,6 +36,7 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.peer.MouseInfoPeer;
+import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
@@ -71,6 +72,8 @@ public class MenuLookDemo {
 
 	static Shape circle = null;
 	static Boolean drag = false;
+	
+	static Color couleur = Color.BLACK;
 
 	public JMenuBar createMenuBar() {
 		JMenuBar menuBar;
@@ -81,13 +84,13 @@ public class MenuLookDemo {
 		menuBar = new JMenuBar();
 
 		// Build the first menu.
-		menu = new JMenuPrio("A Menu", true);
+		menu = new JMenuPrio("Couleurs 1", true);
 		menu.setMnemonic(KeyEvent.VK_A);
 		menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 		menuBar.add(menu);
 
 		// a group of JMenuItems
-		menuItem = new JMenuItemPrio("A text-only menu item", KeyEvent.VK_T, true);
+		menuItem = new JMenuItemPrio("Blue", KeyEvent.VK_T, true);
 		// menuItem.setMnemonic(KeyEvent.VK_T); //used constructor instead
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
@@ -95,41 +98,124 @@ public class MenuLookDemo {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("CA HIDE PAAAAAS");
+				couleur = Color.BLUE;
+				// TODO Auto-generated method stub
+				jMenuActuel = null;
 
 			}
 		});
 		menu.add(menuItem);
-		System.out.println(menuItem.getBackground());
-		System.out.println(menuItem.getForeground());
 
 		ImageIcon icon = createImageIcon("images/middle.gif");
-		menuItem = new JMenuItemPrio("Both text and icon", icon);
-		menuItem.setMnemonic(KeyEvent.VK_B);
+		menuItem = new JMenuItemPrio("Rose", icon);
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.PINK;
+				jMenuActuel = null;
+			}
+		});
+		
 		menu.add(menuItem);
 
 		// a submenu
-		submenu = new JMenuPrio("A submenu", true);
+		submenu = new JMenuPrio("Plus de couleurs!", true);
 		submenu.setMnemonic(KeyEvent.VK_S);
 
-		menuItem = new JMenuItemPrio("An item in the submenu", true);
+		menuItem = new JMenuItemPrio("Vert", true);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.GREEN;
+				jMenuActuel = null;
+			}
+		});
 		submenu.add(menuItem);
 
-		menuItem = new JMenuItemPrio("Another item");
+		menuItem = new JMenuItemPrio("Cyan");
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.CYAN;
+				jMenuActuel = null;
+			}
+		});
 		submenu.add(menuItem);
 		menu.add(submenu);
 
 		// Build second menu in the menu bar.
-		menu = new JMenuPrio("Another Menu");
+		menu = new JMenuPrio("Couleurs 2");
 		menu.setMnemonic(KeyEvent.VK_N);
 		menuBar.add(menu);
 
-		menuItem = new JMenuItemPrio("A text-only menu item", KeyEvent.VK_T);
+		menuItem = new JMenuItemPrio("Orange", KeyEvent.VK_T);
 		// menuItem.setMnemonic(KeyEvent.VK_T); //used constructor instead
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.ORANGE;
+				jMenuActuel = null;
+			}
+		});
 		menu.add(menuItem);
+		
+		// Build thir menu
+		// Build second menu in the menu bar.
+		menu = new JMenuPrio("Couleurs 3", true);
+		menu.setMnemonic(KeyEvent.VK_N);
+		menuBar.add(menu);
+
+		menuItem = new JMenuItemPrio("Rouge", KeyEvent.VK_T, true);
+		// menuItem.setMnemonic(KeyEvent.VK_T); //used constructor instead
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.RED;
+				jMenuActuel = null;
+			}
+		});
+		menu.add(menuItem);
+		
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menu.add(menuItem);
+		
+		submenu = new JMenuPrio("Plus de couleurs", true);
+		submenu.setMnemonic(KeyEvent.VK_S);
+
+		menuItem = new JMenuItemPrio("Jaune", true);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.YELLOW;
+				jMenuActuel = null;
+			}
+		});
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItemPrio("Magenta");
+		submenu.add(menuItem);
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				couleur = Color.MAGENTA;
+				jMenuActuel = null;
+			}
+		});
+		menu.add(submenu);
 
 		return menuBar;
 	}
@@ -174,6 +260,7 @@ public class MenuLookDemo {
 		MenuLookDemo demo = new MenuLookDemo();
 
 		jMenuBar = demo.createMenuBar();
+		jMenuBar.setRequestFocusEnabled(false);
 		frame.setJMenuBar(jMenuBar);
 	
 
@@ -185,28 +272,34 @@ public class MenuLookDemo {
 				super.paintComponent(g);
 				g.setColor(Color.BLACK);
 				if (drag) {
-					System.out.println(mousePosition);
+					
+					
 					Object object = menuPlusProche(mousePosition.x, mousePosition.y);
 					if (object != null) {
 						if (object instanceof JMenuPrio) {
-							System.out.println("jmenuprio");
+							
 							JMenuPrio menuPrio = (JMenuPrio) object;
-							menuPrio.getLocationOnScreen();
-							menuPrio.getBounds();
 							
-							
-							// Point p = new Point(e.getX(), e.getY());
 							Point p = mousePosition;
-							Point p2 = menuPrio.getLocationOnScreen();
-							p2.translate(menuPrio.getWidth() / 2, menuPrio.getHeight() / 2);
-							drawCircle(p2, p, g);
+						
+							Rectangle r = new Rectangle();
+							r.x = menuPrio.getLocationOnScreen().x - 8;
+							r.y = menuPrio.getLocationOnScreen().y - offset;
+							r.width = menuPrio.getWidth();
+							r.height = menuPrio.getHeight();
+							g.drawRect(r.x, r.y, r.width, r.height);
+							drawCircle(pointPlusProche(r,p), p, g);
 						} else {
-							System.out.println("jmenuItemprio");
+							
 							JMenuItemPrio itemPrio = (JMenuItemPrio) object;
 							Point p = mousePosition;
-							Point p2 = itemPrio.getLocationOnScreen();
-							p2.translate(itemPrio.getWidth() / 2, itemPrio.getHeight() / 2);
-							drawCircle(p2, p, g);
+							Rectangle r = new Rectangle();
+							r.x = itemPrio.getLocationOnScreen().x - 8 ;
+							r.y = itemPrio.getLocationOnScreen().y - offset;
+							r.width = itemPrio.getWidth();
+							r.height = itemPrio.getHeight();
+							g.drawRect(r.x, r.y, r.width, r.height);
+							drawCircle(pointPlusProche(r,p), p, g);
 						}
 					}
 						
@@ -222,7 +315,6 @@ public class MenuLookDemo {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 				mousePositionOnScreen = e.getLocationOnScreen();
 				mousePosition.x = e.getX(); 
 				mousePosition.y = e.getY();
@@ -252,13 +344,10 @@ public class MenuLookDemo {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 				if (SwingUtilities.isRightMouseButton(e)) {
-					System.out.println("On est dans l'evenement mouse released, comme ça on voit bien la difference");
 					Object object = menuPlusProche(e.getX(), e.getY());
-					System.out.println(object);
-					// System.out.println(jMenuActuel);
+					
 
 					if (object != null) {
 						if (object instanceof JMenuPrio) {
@@ -280,10 +369,10 @@ public class MenuLookDemo {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isRightMouseButton(e)) {
-					System.out.println("Pressed");
+					
 					drag = true;
 					jPanel.repaint();
-					System.out.println(jPanel.getHeight());
+					
 					if (jMenuActuel != null) {
 						jMenuActuel.doClick();
 					}
@@ -293,20 +382,14 @@ public class MenuLookDemo {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 		});
@@ -315,28 +398,46 @@ public class MenuLookDemo {
 		frame.setSize(500, 500);
 		frame.setVisible(true);
 		offset = jPanel.getLocationOnScreen().y;
+		
 	}
 	
 	public static Point pointPlusProche(Rectangle r, Point p)
 	{
-		//TODO vos meres !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !
-		return null;
+		Point pointeur = new Point(p);
+//		pointeur.translate(0, -offset);
+		ArrayList<Point> l = new ArrayList();  //HG, BG, BD, HD
+		Double distMin = Double.MAX_VALUE;
+		Point res = new Point();
+		//HG
+		l.add(new Point(r.getLocation())); 
+		//BG
+		l.add(new Point((int)r.getX(),(int)(r.getY() + r.getHeight())));
+		//(BG - BD) /2
+		l.add(new Point((int)(r.getX() + r.getWidth()/2),(int)(r.getY() + r.getHeight())));
+		//BD
+		l.add(new Point((int)(r.getX() + r.getWidth()),(int)(r.getY() + r.getHeight())));
+		//HD
+		l.add(new Point((int)(r.getX() + r.getWidth()),(int)r.getY()));
+		//(HG - HD)/2
+		l.add(new Point((int)(r.getX() + r.getWidth()/2),(int)r.getY()));
+		for(Point pf: l)
+		{
+			if(pointeur.distance(pf) < distMin)
+			{
+				res = pf;
+				distMin = pointeur.distance(pf);
+			}
+				
+		}
+		return res;
 	}
 
-	public static void drawCircle(int x, int y, int taille) {
-//		frame.repaint();
-		Graphics g = frame.getGraphics();
-		g.drawOval(x - taille / 2, y - taille / 2, taille * 2, taille * 2);
-		g.setColor(Color.BLACK);
-		g.fillOval(x, y, 2, 2);
-	}
-
-	public static void drawCircle(Point2D pMenu, Point2D pPointeur, Graphics g) {
+	public static void drawCircle(Point pMenu, Point pPointeur, Graphics g) {
+		
 		double rayon = pMenu.distance(pPointeur);
-		g.drawOval((int) pPointeur.getX(), (int) pPointeur.getY(), 2, 2);
-		g.drawRect((int) (pPointeur.getX() - rayon), (int) (pPointeur.getY() - rayon) - offset, (int) (rayon * 2),
-				(int) (rayon * 2));
-		g.drawOval((int) (pPointeur.getX() - rayon), (int) (pPointeur.getY() - rayon) - offset, (int) (rayon * 2),
+		g.setColor(couleur);
+		
+		g.drawOval((int) (pPointeur.getX() - rayon), (int) (pPointeur.getY() - rayon), (int) (rayon * 2),
 				(int) (rayon * 2));
 
 	}
@@ -347,20 +448,25 @@ public class MenuLookDemo {
 
 		// Cas ou on a pas encore choisi de menu -> on check la JMenuBar
 		if (jMenuActuel == null) {
-			System.out.println("menu actuel = null");
+			
 			JMenuPrio jMenuPrio;
 			JMenuPrio jMenuPrioMin = null;
 
 			Point2D point1;
 			double distance;
-
+			
 			for (int i = 0; i < jMenuBar.getMenuCount(); i++) {
 				jMenuPrio = (JMenuPrio) jMenuBar.getMenu(i);
 				// Si c'est un menu prioritaire, alors on regarde la distance
 				if (jMenuPrio.prioritaire) {
 					point1 = new Point(jMenuPrio.getX(), jMenuPrio.getY());
-					distance = point1.distance(x, y);
-					System.out.println(distance);
+					Rectangle r = jMenuPrio.getBounds();
+					
+					Point p = new Point(x,y);
+					Point pmin = pointPlusProche(r,  p);
+					
+					distance = pmin.distance(x,y);
+					
 
 					if (distance < distanceMin) {
 						distanceMin = distance;
@@ -388,13 +494,23 @@ public class MenuLookDemo {
 				if (object instanceof JMenuPrio) {
 					jMenuPrio = (JMenuPrio) object;
 					point1 = new Point(jMenuPrio.getX(), jMenuPrio.getY());
-					distance = point1.distance(x, y);
+					Rectangle r = jMenuPrio.getBounds();
+					
+					Point p = new Point(x,y);
+					Point pmin = pointPlusProche(r,  p);
+					
+					distance = pmin.distance(x,y);
 					prio = jMenuPrio.prioritaire;
 
 				} else {
 					jMenuItemPrio = (JMenuItemPrio) object;
 					point1 = new Point(jMenuItemPrio.getX(), jMenuItemPrio.getY());
-					distance = point1.distance(x, y);
+					Rectangle r = jMenuItemPrio.getBounds();
+					
+					Point p = new Point(x,y);
+					Point pmin = pointPlusProche(r,  p);
+					
+					distance = pmin.distance(x,y);
 					prio = jMenuItemPrio.prioritaire;
 				}
 
