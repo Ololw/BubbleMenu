@@ -75,6 +75,7 @@ public class MenuLookDemo {
 	
 	static Color couleur = Color.BLACK;
 
+	//Fonction pour créer la MenuBar afficher
 	public JMenuBar createMenuBar() {
 		JMenuBar menuBar;
 		JMenuPrio menu, submenu;
@@ -220,6 +221,7 @@ public class MenuLookDemo {
 		return menuBar;
 	}
 
+	//Fonction pour créer le container contenant le JPanel
 	public Container createContentPane() {
 		// Create the content-pane-to-be.
 		JPanel contentPane = new JPanel(new BorderLayout());
@@ -271,6 +273,7 @@ public class MenuLookDemo {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				g.setColor(Color.BLACK);
+				//Si on fait un paint alors qu'on drag, on affiche le cercle du BubbleMenu
 				if (drag) {
 					
 					
@@ -278,6 +281,7 @@ public class MenuLookDemo {
 					if (object != null) {
 						if (object instanceof JMenuPrio) {
 							
+							//On recupere la position de la souris, le menu le plus proche, puis dessine le cercle
 							JMenuPrio menuPrio = (JMenuPrio) object;
 							
 							Point p = mousePosition;
@@ -404,6 +408,8 @@ public class MenuLookDemo {
 		
 	}
 	
+	//Fonction pour récupérer le point le plus proche du rectangle pour un point P
+	//Permet de dessiner un cercle plus fiable
 	public static Point pointPlusProche(Rectangle r, Point p)
 	{
 		Point pointeur = new Point(p);
@@ -435,6 +441,7 @@ public class MenuLookDemo {
 		return res;
 	}
 
+	//Fonction qui dessine le cercle entre deux points
 	public static void drawCircle(Point pMenu, Point pPointeur, Graphics g) {
 		
 		double rayon = pMenu.distance(pPointeur);
